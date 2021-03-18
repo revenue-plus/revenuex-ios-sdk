@@ -1,11 +1,37 @@
 version: 2.1
 jobs:
-  build:
-    docker:
-      - image: alpine:3.7
+  deployment-checks: 
+    macos:
+      xcode: "12.3.0"
+    working_directory: ~/revenuex-ios-sdk
+    shell: /bin/bash --login -o pipefail
     steps:
-      - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
+      - checkout
+
+      # Bundler
+      - restore_cache:
+          keys: 
+            - gem-cache-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --clean --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      
+      # - run:
+      #     name: Deployment checks
+      #     command: bundle exec fastlane deployment_checks
+      #     environment:
+      #       SCAN_SCHEME: All Tests
+      # - store_test_results:
+      #     path: fastlane/test_output
+      # - store_artifacts:
+      #     path: fastlane/test_output/report.html
+      #     destination: test_report.html 
+
+workflows:
+  version: 2.1
+  build-test:
+    jobs:
+      # - runtest
+      - deployment-checks 
