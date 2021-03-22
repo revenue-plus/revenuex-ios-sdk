@@ -21,11 +21,21 @@ or alternatively using `brew install fastlane`
 fastlane ios bump
 ```
 Increment build number
+### ios deployment_checks
+```
+fastlane ios deployment_checks
+```
+Deployment checks
 ### ios deploy
 ```
 fastlane ios deploy
 ```
 Deploy
+### ios prepare_next_version
+```
+fastlane ios prepare_next_version
+```
+Prepare next version
 ### ios github_release
 ```
 fastlane ios github_release
