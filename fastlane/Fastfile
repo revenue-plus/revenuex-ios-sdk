@@ -69,7 +69,7 @@ platform :ios do
       repo: "revenue-plus/revenuex-ios-sdk",
       title: "Prepare next version: #{next_version_snapshot}",
       base: "develop",
-      api_token: "73e838caabc7adbfbaaa4f9e3ae26637164a9f2e"
+      api_token: "b0d71c544bc75282378531321fc1647f077e3b7f"
     )
   end
 
@@ -88,7 +88,7 @@ platform :ios do
     set_github_release(
       repository_name: "revenue-plus/revenuex-ios-sdk",
       # api_token: ENV["GITHUB_TOKEN"],
-      api_token: "73e838caabc7adbfbaaa4f9e3ae26637164a9f2e",
+      api_token: "b0d71c544bc75282378531321fc1647f077e3b7f",
       name: release_version,
       tag_name: "#{release_version}",
       description: changelog,
