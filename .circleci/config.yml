@@ -1,9 +1,9 @@
-release-branches: &release-branches
+test: &test
   filters:
     tags:
       ignore: /.*/
     branches:
-      only: /^release\/.*/
+      only: /.*/
 
 
 version: 2.1
@@ -42,4 +42,4 @@ workflows:
   build-test:
     jobs:
       # - runtest
-      - deployment-checks: *release-branches 
+      - deployment-checks: *test
