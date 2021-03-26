@@ -1,5 +1,5 @@
 test: &test
-  filters:
+  filters: 
     tags:
       ignore: /^.*-SNAPSHOT/
     branches:
