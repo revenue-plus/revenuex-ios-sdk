@@ -80,8 +80,8 @@ jobs:
     working_directory: ~/revenuex-ios-sdk/
     shell: /bin/bash --login -o pipefail
     steps:
-      - checkout
       - install-gems
+      - checkout
       - trust-github-key
       - run:
           name: Prepare next version
