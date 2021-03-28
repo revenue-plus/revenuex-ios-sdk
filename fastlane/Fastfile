@@ -35,7 +35,7 @@ platform :ios do
   lane :deployment_checks do |options|
     version_number = get_version_number(target: "Revenuex")
     check_no_git_tag_exists(version_number)
-    # check_pods
+    check_pods
     export_xcframework
     check_no_github_release_exists(version_number)
   end
@@ -44,7 +44,7 @@ platform :ios do
   desc "Deploy"
   lane :deploy do |options|
     version_number = get_version_number(target: "Revenuex")
-    # pod_push(path: "RevenueX.podspec")
+    pod_push(path: "RevenueX.podspec")
     export_xcframework
     github_release(version: version_number)
   end
