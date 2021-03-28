@@ -79,7 +79,6 @@ jobs:
     steps:
       - checkout
       - trust-github-key
-      - update-spm-integration-commit
       - run:
           name: Deploy new version
           command: bundle exec fastlane deploy
