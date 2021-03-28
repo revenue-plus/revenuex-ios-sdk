@@ -28,7 +28,10 @@ commands:
       - run: 
           name: Bundle install
           working_directory: << parameters.directory >>
-          command: bundle install --clean --path vendor/bundle
+          command: |
+            bundle config set clean 'true' \
+            bundle config set path 'vendor/bundle' \
+            bundle install
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
