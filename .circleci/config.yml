@@ -104,10 +104,5 @@ workflows:
       - deployment-checks: *release-branches
   deploy:
     jobs:
-      - deployment-checks: *release-tags
       - make-release: *release-tags
-          requires:
-            deployment-checks
       - prepare-next-version: *release-tags
-          requires:
-                prepare-next-version
