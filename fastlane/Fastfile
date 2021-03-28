@@ -68,7 +68,11 @@ platform :ios do
       repo: "revenue-plus/revenuex-ios-sdk",
       title: "Prepare next version: #{next_version_snapshot}",
       base: "develop",
+<<<<<<< Updated upstream
       api_token: "6ccfa0aa4d7874170446fcbf811fc1d1ee95126d"
+=======
+      api_token: ENV["GITHUB_TOKEN"]
+>>>>>>> Stashed changes
     )
   end
 
@@ -87,7 +91,7 @@ platform :ios do
     set_github_release(
       repository_name: "revenue-plus/revenuex-ios-sdk",
       # api_token: ENV["GITHUB_TOKEN"],
-      api_token: "6ccfa0aa4d7874170446fcbf811fc1d1ee95126d",
+      api_token: ENV["GITHUB_TOKEN"],
       name: release_version,
       tag_name: "#{release_version}",
       description: changelog,
