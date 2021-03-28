@@ -16,10 +16,6 @@ release-tags: &release-tags
 version: 2.1
 commands:
   install-gems:
-    parameters:
-      directory:
-        type: string
-        default: .
     steps:
        # Bundler
       - restore_cache:
@@ -27,7 +23,7 @@ commands:
             - gem-cache-{{ checksum "Gemfile.lock" }}
       - run: 
           name: Bundle install
-          working_directory: << parameters.directory >>
+          working_directory: ~/revenuex-ios-sdk
           command: |
             bundle config set clean 'true' \
             bundle config set path 'vendor/bundle' \
