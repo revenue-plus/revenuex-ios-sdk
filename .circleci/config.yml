@@ -78,7 +78,7 @@ jobs:
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
-      # - trust-github-key
+      - trust-github-key
       - run:
           name: Deploy new version
           command: bundle exec fastlane deploy
