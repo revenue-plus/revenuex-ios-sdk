@@ -60,7 +60,11 @@ jobs:
       - restore_cache:
           keys: 
             - gem-cache-{{ checksum "Gemfile.lock" }}
-      - run: bundle install --clean --path vendor/bundle
+      - run: 
+        command: |
+          bundle config set clean 'true' \
+          bundle config set path 'vendor/bundle' \
+          bundle install
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -101,8 +105,8 @@ workflows:
   version: 2
   build-test:
     jobs:
-      - deployment-checks: *release-tags
+      - deployment-checks: *release-branches
   deploy:
     jobs:
-      - make-release: *release-branches
+      - make-release: *release-tags
       # - prepare-next-version: *release-branches
