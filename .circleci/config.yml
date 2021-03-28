@@ -1,4 +1,11 @@
-test: &test
+release-branches: &release-branches
+  filters:
+    tags:
+      ignore: /.*/
+    branches:
+      only: /^release\/.*/
+
+release-tags: &release-tags
   filters: 
     tags:
       ignore: /^.*-SNAPSHOT/
@@ -7,14 +14,47 @@ test: &test
 
 
 version: 2.1
+commands:
+  install-gems:
+    parameters:
+      directory:
+        type: string
+        default: .
+    steps:
+       # Bundler
+      - restore_cache:
+          keys: 
+            - gem-cache-{{ checksum "Gemfile.lock" }}
+      - run: 
+          name: Bundle install
+          working_directory: << parameters.directory >>
+          command: bundle install --clean --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+  trust-github-key:
+    steps:
+      - run:
+          name: Trust GitHub key
+          command: |
+              for ip in $(dig @8.8.8.8 github.com +short); \
+              do ssh-keyscan github.com,$ip; \
+              ssh-keyscan $ip; \
+              done 2>/dev/null >> ~/.ssh/known_hosts
+
+
 jobs:
+
   deployment-checks: 
     macos:
-      xcode: "12.3.0"
+      xcode: "12.2.0"
     working_directory: ~/revenuex-ios-sdk
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
+      - trust-github-key
 
       # Bundler
       - restore_cache:
@@ -26,20 +66,44 @@ jobs:
           paths:
             - vendor/bundle
       
-      # - run:
-      #     name: Deployment checks
-      #     command: bundle exec fastlane deployment_checks
-      #     environment:
-      #       SCAN_SCHEME: All Tests
-      # - store_test_results:
-      #     path: fastlane/test_output
-      # - store_artifacts:
-      #     path: fastlane/test_output/report.html
-      #     destination: test_report.html 
+      - run:
+          name: Deployment checks
+          command: bundle exec fastlane deployment_checks
+          
+  
+  make-release:
+    macos:
+      xcode: "12.2.0"
+    working_directory: ~/revenuex-ios-sdk/
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - trust-github-key
+      - update-spm-integration-commit
+      - run:
+          name: Deploy new version
+          command: bundle exec fastlane deploy
+
+  prepare-next-version:
+    macos:
+      xcode: "12.2.0"
+    working_directory: ~/revenuex-ios-sdk/
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - install-gems
+      - trust-github-key
+      - run:
+          name: Prepare next version
+          command: bundle exec fastlane prepare_next_version
+
 
 workflows:
   version: 2
   build-test:
     jobs:
-      # - runtest
-      - deployment-checks: *test
+      - deployment-checks: *release-branches
+  deploy:
+    jobs:
+      - make-release: *release-tags
+      - prepare-next-version: *release-tags
