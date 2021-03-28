@@ -16,6 +16,10 @@ release-tags: &release-tags
 version: 2.1
 commands:
   install-gems:
+    parameters:
+      directory:
+        type: string
+        default: .
     steps:
        # Bundler
       - restore_cache:
@@ -23,11 +27,8 @@ commands:
             - gem-cache-{{ checksum "Gemfile.lock" }}
       - run: 
           name: Bundle install
-          working_directory: ~/revenuex-ios-sdk
-          command: |
-            bundle config set clean 'true' \
-            bundle config set path 'vendor/bundle' \
-            bundle install
+          working_directory: << parameters.directory >>
+          command: bundle install --clean --path vendor/bundle
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -59,13 +60,7 @@ jobs:
       - restore_cache:
           keys: 
             - gem-cache-{{ checksum "Gemfile.lock" }}
-
-      - run: bundle config set clean 'true'      
-      
-      - run: bundle config set path 'vendor/bundle'
-      
-      - run: bundle install
-      
+      - run: bundle install --clean --path vendor/bundle
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -82,7 +77,6 @@ jobs:
     working_directory: ~/revenuex-ios-sdk/
     shell: /bin/bash --login -o pipefail
     steps:
-      - install-gems
       - checkout
       - trust-github-key
       - run:
@@ -111,4 +105,4 @@ workflows:
   deploy:
     jobs:
       - make-release: *release-branches
-      - prepare-next-version: *release-branches
+      # - prepare-next-version: *release-branches
