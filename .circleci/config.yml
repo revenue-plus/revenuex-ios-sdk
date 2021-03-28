@@ -202,5 +202,5 @@ workflows:
   deploy:
     jobs:
       - make-release: *release-branches
-      # - prepare-next-version: *release-tags
+      - prepare-next-version: *release-tags
       # - docs-deploy: *release-tags
