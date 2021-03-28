@@ -16,18 +16,22 @@ release-tags: &release-tags
 version: 2.1
 commands:
   install-gems:
+    parameters:
+      directory:
+        type: string
+        default: .
     steps:
-      # Bundler
+       # Bundler
       - restore_cache:
           keys: 
             - gem-cache-{{ checksum "Gemfile.lock" }}
-
-      - run: bundle config set clean 'true'      
-      
-      - run: bundle config set path 'vendor/bundle'
-      
-      - run: bundle install
-      
+      - run: 
+          name: Bundle install
+          working_directory: << parameters.directory >>
+          command: |
+            bundle config set clean 'true' \
+            bundle config set path 'vendor/bundle' \
+            bundle install
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -55,7 +59,21 @@ jobs:
       - checkout
       - trust-github-key
 
+      # Bundler
+      - restore_cache:
+          keys: 
+            - gem-cache-{{ checksum "Gemfile.lock" }}
 
+      - run: bundle config set clean 'true'      
+      
+      - run: bundle config set path 'vendor/bundle'
+      
+      - run: bundle install
+      
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
       
       - run:
           name: Deployment checks
@@ -69,6 +87,7 @@ jobs:
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
+      - install-gems
       - trust-github-key
       - run:
           name: Deploy new version
@@ -80,8 +99,8 @@ jobs:
     working_directory: ~/revenuex-ios-sdk/
     shell: /bin/bash --login -o pipefail
     steps:
-      - install-gems
       - checkout
+      - install-gems
       - trust-github-key
       - run:
           name: Prepare next version
@@ -92,8 +111,8 @@ workflows:
   version: 2
   build-test:
     jobs:
-      - deployment-checks: *release-tags
+      - deployment-checks: *release-branches
   deploy:
     jobs:
-      - make-release: *release-branches
-      - prepare-next-version: *release-branches
+      - make-release: *release-tags
+      - prepare-next-version: *release-tags
