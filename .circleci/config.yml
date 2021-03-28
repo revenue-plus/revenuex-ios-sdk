@@ -157,39 +157,11 @@ jobs:
           paths:
             - vendor/bundle
       
-      # - update-spm-integration-commit
-      
       - run:
           name: Deployment checks
           command: bundle exec fastlane deployment_checks
-          # environment:
-          #   SCAN_SCHEME: All Tests
-      # - store_test_results:
-      #     path: fastlane/test_output
-      # - store_artifacts:
-      #     path: fastlane/test_output/report.html
-      #     destination: test_report.html
+
           
-  docs-deploy:
-    macos:
-      xcode: "12.2.0"
-    working_directory: ~/revenuex-ios-sdk
-    shell: /bin/bash --login -o pipefail
-    steps:
-      - checkout
-      - install-gems
-      - run:
-          name: Build docs
-          command: bundle exec fastlane run jazzy
-      - run:
-          name: Install awscli
-          command: sudo python3 -m pip install awscli
-      - run:
-          name: Deploy to S3
-          command: aws s3 sync docs s3://purchases-docs/ios --delete --acl public-read
-      - run:
-          name: Invalidate CloudFront caches
-          command: aws cloudfront create-invalidation --distribution-id EPTW7F3CB566V --paths "/*"
   
   make-release:
     macos:
@@ -199,7 +171,7 @@ jobs:
     steps:
       - checkout
       - trust-github-key
-      - update-spm-integration-commit
+      - install-gems
       - run:
           name: Deploy new version
           command: bundle exec fastlane deploy
@@ -216,80 +188,6 @@ jobs:
       - run:
           name: Prepare next version
           command: bundle exec fastlane prepare_next_version
-
-  integration-tests-cocoapods:
-    macos:
-      xcode: "12.2.0"
-    working_directory: ~/revenuex-ios-sdk/
-    shell: /bin/bash --login -o pipefail
-    steps:
-      - checkout
-      
-      - install-gems
-      - install-gems:
-          directory: IntegrationTests/CocoapodsIntegration
-
-      - run:
-          name: Install Pods
-          working_directory: IntegrationTests/CocoapodsIntegration/
-          command: |
-              pod install
-      
-      - scan-and-archive:
-          directory: IntegrationTests/CocoapodsIntegration
-      
-  integration-tests-swift-package-manager:
-    macos:
-      xcode: "12.2.0"
-    working_directory: ~/revenuex-ios-sdk/
-    shell: /bin/bash --login -o pipefail
-    steps:
-      - checkout
-      - trust-github-key
-      - update-spm-integration-commit
-      - install-gems-scan-and-archive:
-          directory: IntegrationTests/SPMIntegration/
-      
-  integration-tests-carthage:
-    macos:
-      xcode: "12.2.0"
-    working_directory: ~/revenuex-ios-sdk/
-    shell: /bin/bash --login -o pipefail
-    steps:
-      - checkout
-      - trust-github-key
-      - update-carthage-integration-commit
-      # Carthage
-      - restore_cache:
-          keys: 
-            - carthage-cache-{{ checksum "Cartfile.resolved" }}
-      - run:
-          name: Carthage Update
-          working_directory: IntegrationTests/CarthageIntegration/
-          # install without building, then remove the tests and build, so that carthage
-          # doesn't try to build the other integration tests
-          command: |
-              ./carthage.sh update --no-build
-              rm -rf Carthage/Checkouts/purchases-root/IntegrationTests/
-              ./carthage.sh build
-      - save_cache:
-          key: carthage-cache-{{ checksum "Cartfile.resolved" }}
-          paths:
-            - Carthage
-      
-      - install-gems-scan-and-archive:
-          directory: IntegrationTests/CarthageIntegration/
-
-  integration-tests-xcode-direct-integration:
-    macos:
-      xcode: "12.2.0"
-    working_directory: ~/revenuex-ios-sdk/
-    shell: /bin/bash --login -o pipefail
-    steps:
-      - checkout
-
-      - install-gems-scan-and-archive:
-          directory: IntegrationTests/XcodeDirectIntegration/
 
 workflows:
   version: 2
