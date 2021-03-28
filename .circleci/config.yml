@@ -77,8 +77,8 @@ jobs:
     working_directory: ~/revenuex-ios-sdk/
     shell: /bin/bash --login -o pipefail
     steps:
-      - checkout
-      - trust-github-key
+      # - checkout
+      # - trust-github-key
       - run:
           name: Deploy new version
           command: bundle exec fastlane deploy
