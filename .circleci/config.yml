@@ -77,7 +77,6 @@ jobs:
     working_directory: ~/revenuex-ios-sdk/
     shell: /bin/bash --login -o pipefail
     steps:
-      - deployment-checks
       - checkout
       - trust-github-key
       - run:
@@ -105,5 +104,10 @@ workflows:
       - deployment-checks: *release-branches
   deploy:
     jobs:
+      - deployment-checks: *release-tags
       - make-release: *release-tags
+          requires:
+            deployment-checks
       - prepare-next-version: *release-tags
+          requires:
+                prepare-next-version
