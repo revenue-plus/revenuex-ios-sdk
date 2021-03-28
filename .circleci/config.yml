@@ -16,23 +16,17 @@ release-tags: &release-tags
 version: 2.1
 commands:
   install-gems:
-    parameters:
-      directory:
-        type: string
-        default: .
-    steps:
-       # Bundler
+      # Bundler
       - restore_cache:
           keys: 
             - gem-cache-{{ checksum "Gemfile.lock" }}
-      - run: 
-          name: Bundle install
-          working_directory: << parameters.directory >>
-          command: |
-            echo << parameters.directory >> \
-            bundle config set clean 'true' \
-            bundle config set path 'vendor/bundle' \
-            bundle install
+
+      - run: bundle config set clean 'true'      
+      
+      - run: bundle config set path 'vendor/bundle'
+      
+      - run: bundle install
+      
       - save_cache:
           key: gem-cache-{{ checksum "Gemfile.lock" }}
           paths:
@@ -59,22 +53,8 @@ jobs:
     steps:
       - checkout
       - trust-github-key
+      - install-gems
 
-      # Bundler
-      - restore_cache:
-          keys: 
-            - gem-cache-{{ checksum "Gemfile.lock" }}
-
-      - run: bundle config set clean 'true'      
-      
-      - run: bundle config set path 'vendor/bundle'
-      
-      - run: bundle install
-      
-      - save_cache:
-          key: gem-cache-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
       
       - run:
           name: Deployment checks
