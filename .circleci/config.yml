@@ -101,8 +101,8 @@ workflows:
   version: 2
   build-test:
     jobs:
-      - deployment-checks: *release-tags
+      - deployment-checks: *release-branches
   deploy:
     jobs:
-      - make-release: *release-branches
+      - make-release: *release-tags
       # - prepare-next-version: *release-branches
