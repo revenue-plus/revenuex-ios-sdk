@@ -7,7 +7,7 @@ release-tags-and-branches: &release-tags-and-branches
 
 release-branches: &release-branches
   filters:
-    tags:
+    tags:asdas
       ignore: /.*/
     branches:
       only: /^release\/.*/
