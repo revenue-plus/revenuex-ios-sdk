@@ -23,7 +23,7 @@ platform :ios do
   
   desc "Create new version"
   lane :create_new_version do |options|
-    new_version = options[:version]
+    new_version = options[:v]
     fail ArgumentError, "missing version" unless new_version
     previous_version =  get_version_number(target: "Revenuex")
     increment_version_number(version_number: new_version)
@@ -37,22 +37,22 @@ platform :ios do
     end
   end
 
-  desc "Deployment checks"
-  lane :deployment_checks do |options|
-    version_number = get_version_number(target: "Revenuex")
-    check_no_git_tag_exists(version_number)
-    check_pods
+  desc "Checks before deployment"
+  lane :check_before_deploy do |options|
+    current_version = get_version_number(target: "Revenuex")
+    check_if_git_tag_exists(current_version)
+    check_if_github_release_exists(current_version)
+    pod_lib_lint(verbose: true, podspec:'RevenueX.podspec')
     export_xcframework
-    check_no_github_release_exists(version_number)
   end
 
 
   desc "Deploy"
   lane :deploy do |options|
-    version_number = get_version_number(target: "Revenuex")
+    version = get_version_number(target: "Revenuex")
     pod_push(path: "RevenueX.podspec")
     export_xcframework
-    github_release(version: version_number)
+    github_release(version: version)
   end
 
   desc "Prepare next version"
@@ -134,7 +134,7 @@ platform :ios do
 
 end
 
-def attach_changelog_to_master(version_number)
+def attach_changelog_to_master(version)
   current_changelog = File.open("../CHANGELOG.latest.md", 'r')
   master_changelog = File.open("../CHANGELOG.md", 'r')
 
@@ -145,7 +145,7 @@ def attach_changelog_to_master(version_number)
   master_changelog.close
 
   File.open("../CHANGELOG.md", 'w') { |master_changelog_write_mode|
-    version_header = "## #{version_number}"
+    version_header = "## #{version}"
     whole_file_data = "#{version_header}\n#{current_changelog_data}\n#{master_changelog_data}"
     puts "going to save. Contents - #{whole_file_data}"
     
@@ -153,17 +153,14 @@ def attach_changelog_to_master(version_number)
   }
 end
 
-def check_no_git_tag_exists(version_number)
-  if git_tag_exists(tag: version_number, remote: true, remote_name: 'origin')
-    raise "git tag with version #{version_number} already exists!"
+def check_if_git_tag_exists(version)
+  if git_tag_exists(tag: version, remote: true, remote_name: 'origin')
+    raise "git tag with version #{version} already exists!"
   end
 end
 
-def check_no_github_release_exists(version_number)
-  found_release_number = get_github_release(url: "revenuecat/purchases-ios", version: version_number)
-  raise "Release with version #{version_number} already exists!" unless found_release_number.nil?
+def check_if_github_release_exists(version)
+  release_number = get_github_release(url: "revenuecat/purchases-ios", version: version)
+  raise "#{version} already exists!" unless release_number.nil?
 end
 
-def check_pods
-  pod_lib_lint(verbose: true, podspec:'RevenueX.podspec')
-end
