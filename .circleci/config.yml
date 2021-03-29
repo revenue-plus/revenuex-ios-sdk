@@ -1,0 +1,207 @@
+release-tags-and-branches: &release-tags-and-branches
+  filters:
+    tags:
+      ignore: /^.*-SNAPSHOT/
+    branches:
+      only: /^release\/.*/
+
+release-branches: &release-branches
+  filters:
+    tags:
+      ignore: /.*/
+    branches:
+      only: /^release\/.*/
+
+release-tags: &release-tags
+  filters: 
+    tags:
+      ignore: /^.*-SNAPSHOT/
+    branches:
+      ignore: /.*/
+
+
+version: 2.1
+commands:
+  install-gems:
+    parameters:
+      directory:
+        type: string
+        default: .
+    steps:
+       # Bundler
+      - restore_cache:
+          keys: 
+            - gem-cache-{{ checksum "Gemfile.lock" }}
+      - run: 
+          name: Bundle install
+          working_directory: << parameters.directory >>
+          command: bundle install --clean --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+  scan-and-archive:
+    parameters:
+      directory:
+        type: string
+    steps:
+      - run: 
+          name: Replace API key
+          command: bundle exec fastlane replace_api_key_integration_tests
+      
+      - run:
+          name: Run tests
+          working_directory: << parameters.directory >>
+          command: bundle exec fastlane scan
+
+      - store_test_results:
+          path: fastlane/test_output
+      - store_artifacts:
+          path: fastlane/test_output/report.html
+          destination: test_report.html
+      - run:
+          name: Archive
+          working_directory: << parameters.directory >>
+          command: |
+              bundle exec fastlane archive
+  
+  install-gems-scan-and-archive:
+    parameters:
+      directory:
+        type: string
+    steps:
+      - install-gems:
+          directory: << parameters.directory >>
+      - scan-and-archive:
+          directory: << parameters.directory >>
+
+  trust-github-key:
+    steps:
+      - run:
+          name: Trust GitHub key
+          command: |
+              for ip in $(dig @8.8.8.8 github.com +short); \
+              do ssh-keyscan github.com,$ip; \
+              ssh-keyscan $ip; \
+              done 2>/dev/null >> ~/.ssh/known_hosts
+
+  update-spm-integration-commit:
+    steps:
+      - install-gems
+      - run:
+          name: Update git commit in SPM package
+          working_directory: IntegrationTests/SPMIntegration/
+          command: |
+              bundle exec fastlane update_swift_package_commit
+
+  update-carthage-integration-commit:
+    steps:
+      - install-gems
+      - run:
+          name: Update git commit in Carthage Integration tests
+          working_directory: IntegrationTests/CarthageIntegration/
+          command: |
+              bundle exec fastlane update_carthage_commit
+
+jobs:
+  runtest:
+    macos:
+      xcode: "12.2.0"
+    working_directory: ~/revenuex-ios-sdk
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      
+      # Carthage
+      - restore_cache:
+          keys: 
+            - carthage-cache-{{ checksum "Cartfile.resolved" }}
+      - run:
+          name: Carthage Bootstrap
+          command: |
+              ./carthage.sh bootstrap --cache-builds
+      - save_cache:
+          key: carthage-cache-{{ checksum "Cartfile.resolved" }}
+          paths:
+            - Carthage
+      
+      - install-gems
+      
+      - run:
+          name: Run tests
+          command: bundle exec fastlane scan
+          environment:
+            SCAN_SCHEME: All Tests
+      - store_test_results:
+          path: fastlane/test_output
+      - store_artifacts:
+          path: fastlane/test_output/report.html
+          destination: test_report.html
+
+  deployment-checks: 
+    macos:
+      xcode: "12.2.0"
+    working_directory: ~/revenuex-ios-sdk
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - trust-github-key
+
+      # Bundler
+      - restore_cache:
+          keys: 
+            - gem-cache-{{ checksum "Gemfile.lock" }}
+      - run: bundle install --clean --path vendor/bundle
+      - save_cache:
+          key: gem-cache-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      
+      - run:
+          name: Deployment checks
+          command: bundle exec fastlane deployment_checks
+
+          
+  
+  make-release:
+    macos:
+      xcode: "12.2.0"
+    working_directory: ~/revenuex-ios-sdk/
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - trust-github-key
+      - install-gems
+      - run:
+          name: Deploy new version
+          command: bundle exec fastlane deploy
+
+  prepare-next-version:
+    macos:
+      xcode: "12.2.0"
+    working_directory: ~/revenuex-ios-sdk/
+    shell: /bin/bash --login -o pipefail
+    steps:
+      - checkout
+      - install-gems
+      - trust-github-key
+      - run:
+          name: Prepare next version
+          command: bundle exec fastlane prepare_next_version
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      # - runtest
+      - deployment-checks: *release-branches
+    
+      # - integration-tests-cocoapods: *release-tags-and-branches
+      # - integration-tests-swift-package-manager: *release-tags-and-branches
+      # - integration-tests-carthage: *release-tags-and-branches
+      # - integration-tests-xcode-direct-integration: *release-tags-and-branches
+  deploy:
+    jobs:
+      - make-release: *release-tags
+      - prepare-next-version: *release-tags
+      # - docs-deploy: *release-tags
