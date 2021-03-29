@@ -63,7 +63,7 @@ platform :ios do
     
     next_version_copy = "#{next_version}-copy"
 
-    branch = "new/#{next_version_copy}"
+    branch = "next/#{next_version_copy}"
     sh("git", "checkout", "-b", branch)
 
     create_new_version(v: next_version_copy)
@@ -93,7 +93,6 @@ platform :ios do
 
     set_github_release(
       repository_name: "revenue-plus/revenuex-ios-sdk",
-      # api_token: ENV["GITHUB_TOKEN"],
       api_token: ENV["GITHUB_TOKEN"],
       name: release_version,
       tag_name: "#{release_version}",
