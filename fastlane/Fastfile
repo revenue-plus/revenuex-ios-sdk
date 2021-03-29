@@ -56,23 +56,24 @@ platform :ios do
   end
 
   desc "Prepare next version"
-  lane :prepare_next_version do |options|
+  lane :prepare_next do |options|
     current_version_number = get_version_number(target: "Revenuex")
     major, minor, _ = current_version_number.split('.')
     next_version = "#{major}.#{minor.to_i + 1}.0"
-    next_version_snapshot = "#{next_version}-SNAPSHOT"
+    
+    next_version_copy = "#{next_version}-copy"
 
-    branch_name = "new/#{next_version_snapshot}"
-    sh("git", "checkout", "-b", branch_name)
+    branch = "new/#{next_version_copy}"
+    sh("git", "checkout", "-b", branch)
 
-    create_new_version(version: next_version_snapshot)
+    create_new_version(v: next_version_copy)
 
-    sh("git", "commit", "-am", "Preparing for next version")
+    sh("git", "commit", "-am", "Preparing next")
     push_to_git_remote
 
     create_pull_request(
       repo: "revenue-plus/revenuex-ios-sdk",
-      title: "Prepare next version: #{next_version_snapshot}",
+      title: "Next version: #{next_version_copy}",
       base: "develop",
       api_token: ENV["GITHUB_TOKEN"]
     )

@@ -16,24 +16,24 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios bump
+### ios create_new_version
 ```
-fastlane ios bump
+fastlane ios create_new_version
 ```
-Increment build number
-### ios deployment_checks
+Create new version
+### ios check_before_deploy
 ```
-fastlane ios deployment_checks
+fastlane ios check_before_deploy
 ```
-Deployment checks
+Checks before deployment
 ### ios deploy
 ```
 fastlane ios deploy
 ```
 Deploy
-### ios prepare_next_version
+### ios prepare_next
 ```
-fastlane ios prepare_next_version
+fastlane ios prepare_next
 ```
 Prepare next version
 ### ios github_release

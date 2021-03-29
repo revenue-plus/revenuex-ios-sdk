@@ -7,7 +7,7 @@ release-tags-and-branches: &release-tags-and-branches
 
 release-branches: &release-branches
   filters:
-    tags:asdas
+    tags:
       ignore: /.*/
     branches:
       only: /^release\/.*/
@@ -159,7 +159,7 @@ jobs:
       
       - run:
           name: Deployment checks
-          command: bundle exec fastlane deployment_checks
+          command: bundle exec fastlane check_before_deploy
 
           
   
@@ -187,7 +187,7 @@ jobs:
       - trust-github-key
       - run:
           name: Prepare next version
-          command: bundle exec fastlane prepare_next_version
+          command: bundle exec fastlane prepare_next
 
 workflows:
   version: 2
