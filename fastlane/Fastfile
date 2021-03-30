@@ -62,7 +62,7 @@ platform :ios do
     major, minor, _ = current_version_number.split('.')
     
     next_version = "#{major}.#{minor.to_i + 1}.0"
-    next_version_copy = "#{next_version}-copy"
+    next_version_copy = "#{next_version}-COPY"
 
     branch = "next/#{next_version_copy}"
     sh("git", "checkout", "-b", branch)
