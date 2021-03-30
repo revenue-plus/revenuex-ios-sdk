@@ -52,15 +52,16 @@ platform :ios do
     version = get_version_number(target: "Revenuex")
     pod_push(path: "RevenueX.podspec")
     export_xcframework
-    github_release(version: version)
+    release(version: version)
   end
 
   desc "Prepare next version"
   lane :prepare_next do |options|
     current_version_number = get_version_number(target: "Revenuex")
+  
     major, minor, _ = current_version_number.split('.')
-    next_version = "#{major}.#{minor.to_i + 1}.0"
     
+    next_version = "#{major}.#{minor.to_i + 1}.0"
     next_version_copy = "#{next_version}-copy"
 
     branch = "next/#{next_version_copy}"
@@ -80,22 +81,22 @@ platform :ios do
   end
 
 
-  desc "Make github release"
-  lane :github_release do |options|
-    release_version = options[:version]
-    fail ArgumentError, "missing version" unless release_version
+  desc "Release"
+  lane :release do |options|
+    version = options[:version]
+    fail ArgumentError, "needs version number" unless version
 
     begin
       changelog = File.read("../CHANGELOG.latest.md")
     rescue
-      fail "please add a CHANGELOG.latest.md file before calling this lane"
+      fail "needs CHANGELOG.latest.md update"
     end
 
     set_github_release(
       repository_name: "revenue-plus/revenuex-ios-sdk",
-      api_token: ENV["GITHUB_TOKEN"],
-      name: release_version,
-      tag_name: "#{release_version}",
+      api_token: ENV["GITHUB_API_TOKEN"],
+      name: version,
+      tag_name: "#{version}",
       description: changelog,
       commitish: "develop",
       upload_assets: ["Revenuex.xcframework.zip"],
@@ -116,7 +117,7 @@ platform :ios do
       xcframework_output_directory: output_directory,
       enable_bitcode: false
     )
-    # sh runs from the Fastfile's location, but other commands run from the project root.
+  
     output_directory_for_sh = "../#{output_directory}"
 
     xcframeworks_zip_path_for_sh = "../Revenuex.xcframework.zip"
@@ -126,10 +127,10 @@ platform :ios do
 
   end
 
-  desc "Increment build number and update changelog"
-  lane :bump_and_update_changelog do |options|
+  desc "Create new version and update changelog"
+  lane :create_new_version_and_update_changelog do |options|
     create_new_version(options)
-    attach_changelog_to_master(options[:version])
+    attach_changelog_to_master(options[:v])
   end
 
 end
@@ -155,7 +156,7 @@ end
 
 def check_if_git_tag_exists(version)
   if git_tag_exists(tag: version, remote: true, remote_name: 'origin')
-    raise "git tag with version #{version} already exists!"
+    raise "git tag already exists!"
   end
 end
 

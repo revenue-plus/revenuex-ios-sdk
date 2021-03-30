@@ -36,21 +36,21 @@ Deploy
 fastlane ios prepare_next
 ```
 Prepare next version
-### ios github_release
+### ios release
 ```
-fastlane ios github_release
+fastlane ios release
 ```
-Make github release
+Release
 ### ios export_xcframework
 ```
 fastlane ios export_xcframework
 ```
 Export XCFramework
-### ios bump_and_update_changelog
+### ios create_new_version_and_update_changelog
 ```
-fastlane ios bump_and_update_changelog
+fastlane ios create_new_version_and_update_changelog
 ```
-Increment build number and update changelog
+Create new version and update changelog
 
 ----
 
