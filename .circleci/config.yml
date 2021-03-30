@@ -15,6 +15,15 @@ release-tags: &release-tags
 
 version: 2.1
 commands:
+         :
+  steps:
+    - run:
+        name: Trust GitHub key
+        command: |
+            for ip in $(dig @8.8.8.8 github.com +short); \
+            do ssh-keyscan github.com,$ip; \
+            ssh-keyscan $ip; \
+            done 2>/dev/null >> ~/.ssh/known_hosts
   install-gems:
     parameters:
       directory:
@@ -43,7 +52,7 @@ jobs:
     shell: /bin/bash --login -o pipefail
     steps:
       - checkout
-
+      - trust-github-key
       - restore_cache:
           keys: 
             - gem-cache-{{ checksum "Gemfile.lock" }}
@@ -67,6 +76,7 @@ jobs:
     steps:
       - checkout
       - install-gems
+      - trust-github-key
       - run:
           name: Deploy new version
           command: bundle exec fastlane deploy
@@ -79,6 +89,7 @@ jobs:
     steps:
       - checkout
       - install-gems
+      - trust-github-key
       - run:
           name: Prepare next version
           command: bundle exec fastlane prepare_next
