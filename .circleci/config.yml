@@ -15,15 +15,15 @@ release-tags: &release-tags
 
 version: 2.1
 commands:
-         :
-  steps:
-    - run:
-        name: Trust GitHub key
-        command: |
-            for ip in $(dig @8.8.8.8 github.com +short); \
-            do ssh-keyscan github.com,$ip; \
-            ssh-keyscan $ip; \
-            done 2>/dev/null >> ~/.ssh/known_hosts
+  trust-github-key:
+    steps:
+      - run:
+          name: Trust GitHub key
+          command: |
+              for ip in $(dig @8.8.8.8 github.com +short); \
+              do ssh-keyscan github.com,$ip; \
+              ssh-keyscan $ip; \
+              done 2>/dev/null >> ~/.ssh/known_hosts
   install-gems:
     parameters:
       directory:
@@ -70,7 +70,7 @@ jobs:
   
   release:
     macos:
-      xcode: "12.2.0"
+      xcode: "12.2.0" 
     working_directory: ~/revenuex-ios-sdk/
     shell: /bin/bash --login -o pipefail
     steps:
