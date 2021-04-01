@@ -72,15 +72,15 @@ platform :ios do
     sh("git", "commit", "-am", "Preparing next")
     push_to_git_remote
 
-    puts "Current Version: #{current_version_number}"
-    puts "New branch: #{branch}"
+    # puts "Current Version: #{current_version_number}"
+    # puts "New branch: #{branch}"
 
-    create_pull_request(
-      repo: "revenue-plus/revenuex-ios-sdk",
-      title: "Next version: #{next_version_copy}",
-      base: "develop",
-      api_token: ENV["GITHUB_TOKEN"]
-    )
+    # create_pull_request(
+    #   repo: "revenue-plus/revenuex-ios-sdk",
+    #   title: "Next version: #{next_version_copy}",
+    #   base: "develop",
+    #   api_token: ENV["GITHUB_TOKEN"]
+    # )
   end
 
 
