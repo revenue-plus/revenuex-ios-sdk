@@ -124,7 +124,6 @@ platform :ios do
       xcframework_output_directory: output_directory,
       enable_bitcode: false
     )
-    # sh runs from the Fastfile's location, but other commands run from the project root.
     output_directory_for_sh = "../#{output_directory}"
 
     xcframeworks_zip_path_for_sh = "../Revenuex.xcframework.zip"
