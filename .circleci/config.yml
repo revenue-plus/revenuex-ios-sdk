@@ -96,6 +96,11 @@ jobs:
 
 workflows:
   version: 2
+  build-test:
+    jobs:
+      - deployment-checks: *release-branches
+    
   deploy:
     jobs:
-      - prepare-next
+      - release: *release-tags
+      - prepare-next: *release-tags
