@@ -72,7 +72,7 @@ platform :ios do
     sh("git", "commit", "-am", "Preparing next")
     push_to_git_remote(
       local_branch:branch,
-      remote_branch:"branch
+      remote_branch:branch
     )
 
     puts "Current Version: #{current_version_number}"
