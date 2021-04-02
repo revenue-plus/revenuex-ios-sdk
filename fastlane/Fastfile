@@ -135,7 +135,7 @@ platform :ios do
   end
 
   desc "Increment build number and update changelog"
-  lane :bump_and_update_changelog do |options|
+  lane :create_and_update_changelog do |options|
     create_new_version(options)
     attach_changelog_to_master(options[:version])
   end
