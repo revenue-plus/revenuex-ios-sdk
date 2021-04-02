@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RevenueX"
-  s.version          = "0.35.0-copy"
+  s.version          = "0.36.0-copy"
   s.summary          = "Subscription and purchase tracking system"
 
   s.description      = <<-DESC
