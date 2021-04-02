@@ -78,7 +78,7 @@ platform :ios do
     create_pull_request(
       repo: "revenue-plus/revenuex-ios-sdk",
       title: "Next version: #{next_version_copy}",
-      heat: branch,
+      head: branch,
       base: "develop",
       api_token: ENV["GITHUB_TOKEN"]
     )
