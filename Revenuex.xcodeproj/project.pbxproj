@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC4A49E3261F19F0005285BC /* REVNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49E2261F19F0005285BC /* REVNetworkManager.swift */; };
+		FC4A49EA261F250E005285BC /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49E9261F250E005285BC /* Test.swift */; };
+		FC4A49F3261F6ABD005285BC /* REVApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49F2261F6ABD005285BC /* REVApplicationUser.swift */; };
+		FC4A49F7261F9B4D005285BC /* REVDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49F6261F9B4D005285BC /* REVDependencyContainer.swift */; };
+		FC4A49FC261FA100005285BC /* REVCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49FB261FA100005285BC /* REVCache.swift */; };
 		FC5A776526023B560073AB4C /* Revenuex.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5A776326023B560073AB4C /* Revenuex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC5A776D26023B890073AB4C /* Revenuex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A776C26023B890073AB4C /* Revenuex.swift */; };
-		FCBE8DF2261C538400217C74 /* REVRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8DF1261C538400217C74 /* REVRequest.swift */; };
 		FCBE8E0D261C887B00217C74 /* REVSystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E0C261C887B00217C74 /* REVSystemInfo.swift */; };
 		FCBE8E12261C8C6C00217C74 /* REVConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E11261C8C6C00217C74 /* REVConfig.swift */; };
 		FCBE8E39261CEF6800217C74 /* REVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E38261CEF6800217C74 /* REVError.swift */; };
@@ -19,11 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC4A49E2261F19F0005285BC /* REVNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVNetworkManager.swift; sourceTree = "<group>"; };
+		FC4A49E9261F250E005285BC /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		FC4A49F2261F6ABD005285BC /* REVApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVApplicationUser.swift; sourceTree = "<group>"; };
+		FC4A49F6261F9B4D005285BC /* REVDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVDependencyContainer.swift; sourceTree = "<group>"; };
+		FC4A49FB261FA100005285BC /* REVCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVCache.swift; sourceTree = "<group>"; };
 		FC5A776026023B560073AB4C /* Revenuex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Revenuex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A776326023B560073AB4C /* Revenuex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Revenuex.h; sourceTree = "<group>"; };
 		FC5A776426023B560073AB4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC5A776C26023B890073AB4C /* Revenuex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Revenuex.swift; sourceTree = "<group>"; };
-		FCBE8DF1261C538400217C74 /* REVRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVRequest.swift; sourceTree = "<group>"; };
 		FCBE8E0C261C887B00217C74 /* REVSystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVSystemInfo.swift; sourceTree = "<group>"; };
 		FCBE8E11261C8C6C00217C74 /* REVConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVConfig.swift; sourceTree = "<group>"; };
 		FCBE8E38261CEF6800217C74 /* REVError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVError.swift; sourceTree = "<group>"; };
@@ -43,6 +51,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC4A49ED261F6416005285BC /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				FCBE8E43261D96A100217C74 /* REVErrorResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		FC4A49F1261F6A43005285BC /* Application User */ = {
+			isa = PBXGroup;
+			children = (
+				FC4A49F2261F6ABD005285BC /* REVApplicationUser.swift */,
+			);
+			path = "Application User";
+			sourceTree = "<group>";
+		};
+		FC4A49FA261FA0F4005285BC /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				FC4A49FB261FA100005285BC /* REVCache.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
 		FC5A775626023B560073AB4C = {
 			isa = PBXGroup;
 			children = (
@@ -62,8 +94,9 @@
 		FC5A776226023B560073AB4C /* Revenuex */ = {
 			isa = PBXGroup;
 			children = (
+				FC4A49FA261FA0F4005285BC /* Device */,
+				FC4A49F1261F6A43005285BC /* Application User */,
 				FCBE8DF0261C536D00217C74 /* Common Files */,
-				FCBE8E3B261D8FE600217C74 /* Models */,
 				FCBE8E0A261C885900217C74 /* Misc */,
 				FCBE8DEF261C536100217C74 /* Network */,
 				FC5A776326023B560073AB4C /* Revenuex.h */,
@@ -76,9 +109,10 @@
 		FCBE8DEF261C536100217C74 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				FCBE8E5A261DC40D00217C74 /* Responses */,
+				FC4A49E2261F19F0005285BC /* REVNetworkManager.swift */,
 				FCBE8E59261DC40800217C74 /* Requests */,
-				FCBE8E42261D968100217C74 /* Error */,
+				FC4A49ED261F6416005285BC /* Responses */,
+				FCBE8E42261D968100217C74 /* Models */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -87,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				FCBE8E3C261D950E00217C74 /* REVModel.swift */,
-				FCBE8DF1261C538400217C74 /* REVRequest.swift */,
 			);
 			path = "Common Files";
 			sourceTree = "<group>";
@@ -98,46 +131,25 @@
 				FCBE8E0C261C887B00217C74 /* REVSystemInfo.swift */,
 				FCBE8E11261C8C6C00217C74 /* REVConfig.swift */,
 				FCBE8E49261DABE800217C74 /* REVCodableExtensions.swift */,
+				FC4A49F6261F9B4D005285BC /* REVDependencyContainer.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		FCBE8E3B261D8FE600217C74 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		FCBE8E42261D968100217C74 /* Error */ = {
+		FCBE8E42261D968100217C74 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				FCBE8E38261CEF6800217C74 /* REVError.swift */,
-				FCBE8E4E261DBB9B00217C74 /* Failure Reasons */,
 			);
-			path = Error;
-			sourceTree = "<group>";
-		};
-		FCBE8E4E261DBB9B00217C74 /* Failure Reasons */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Failure Reasons";
+			path = Models;
 			sourceTree = "<group>";
 		};
 		FCBE8E59261DC40800217C74 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				FCBE8E43261D96A100217C74 /* REVErrorResponse.swift */,
+				FC4A49E9261F250E005285BC /* Test.swift */,
 			);
 			path = Requests;
-			sourceTree = "<group>";
-		};
-		FCBE8E5A261DC40D00217C74 /* Responses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Responses;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,13 +231,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4A49E3261F19F0005285BC /* REVNetworkManager.swift in Sources */,
 				FCBE8E4A261DABE800217C74 /* REVCodableExtensions.swift in Sources */,
+				FC4A49F3261F6ABD005285BC /* REVApplicationUser.swift in Sources */,
 				FCBE8E39261CEF6800217C74 /* REVError.swift in Sources */,
 				FCBE8E12261C8C6C00217C74 /* REVConfig.swift in Sources */,
+				FC4A49FC261FA100005285BC /* REVCache.swift in Sources */,
 				FCBE8E0D261C887B00217C74 /* REVSystemInfo.swift in Sources */,
 				FC5A776D26023B890073AB4C /* Revenuex.swift in Sources */,
 				FCBE8E44261D96A100217C74 /* REVErrorResponse.swift in Sources */,
-				FCBE8DF2261C538400217C74 /* REVRequest.swift in Sources */,
+				FC4A49F7261F9B4D005285BC /* REVDependencyContainer.swift in Sources */,
+				FC4A49EA261F250E005285BC /* Test.swift in Sources */,
 				FCBE8E3D261D950E00217C74 /* REVModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,7 +301,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -343,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

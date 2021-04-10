@@ -7,15 +7,10 @@
 
 import UIKit
 
-class REVConfig {
+struct REVConfig {
 
-    static let current = REVConfig()
-    
-    private init () {}
-    
     let hostName:String = "sdk.revenueplus.net"
     let urlScheme:String = "https"
     
-    var isSandbox:Bool = false
     
 }

@@ -11,7 +11,6 @@ import UIKit
 
 
 public class REVErrorResponse: Codable {
-
     
     private var code:Int
     private var status:Int

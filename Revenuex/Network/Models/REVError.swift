@@ -16,6 +16,9 @@ enum REVError: Error {
     /// Api request failed.
     case responseError(reason: REVResponseErrorReason)
     
+    /// Network Error
+    case networkError(error: Error)
+    
     /// Unknown error.
     case unknown
     
@@ -29,6 +32,8 @@ extension REVError:LocalizedError {
             return reason.localizedDescription
         case .responseError(let reason):
             return reason.localizedDescription
+        case .networkError(let error):
+            return error.localizedDescription
         case .unknown:
             return nil
         }

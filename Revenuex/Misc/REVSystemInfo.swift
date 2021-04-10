@@ -17,4 +17,13 @@ class REVSystemInfo {
         return ProcessInfo().operatingSystemVersionString
     }
     
+    static var isSandbox:Bool {
+        guard let url = Bundle.main.appStoreReceiptURL else {
+            return false
+        }
+        let receiptURLString = url.path;
+        return receiptURLString.contains("sandboxReceipt")
+    }
+    
+    
 }
