@@ -13,7 +13,7 @@ extension Revenuex {
         
         guard
             let userRepository = self.userRepository,
-            let userId = self.store.applicationUserId
+            let userId = self.store.revenuexUserId
         else {return}
         
         SetAttiributionLocallyUseCase

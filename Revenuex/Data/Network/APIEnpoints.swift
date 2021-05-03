@@ -9,10 +9,10 @@ import Foundation
 
 struct APIEndpoints {
     
-    static func sendOpenEvent(userId:String) -> Endpoint<UserDTO> {
-        return Endpoint(path:"/api/transactions/application-users/open-event",
-                        method: .get,
-                        headerParamaters: ["userId":userId])
+    static func sendOpenEvent(userId:String) -> Endpoint<RevenueXUserDTO> {
+        return Endpoint(path:"api/transactions/application-users/open-event",
+                        method: .post,
+                        headerParamaters: ["user-revenueXId":userId])
     }
     
     static func sendPaymentInfo(receiptData: String, price: Double, productId: String, currency: String, isSubscription:Bool) -> Endpoint<Void> {
@@ -29,7 +29,7 @@ struct APIEndpoints {
             "receiptData" : receiptData
         ]
         
-        return Endpoint(path:"/api/transactions/validate",
+        return Endpoint(path:"api/transactions/validate",
                         method: .post,
                         bodyParamaters: body)
     }

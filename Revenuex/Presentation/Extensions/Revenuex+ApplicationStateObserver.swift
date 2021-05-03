@@ -11,7 +11,7 @@ extension Revenuex : ApplicationStateObserverDelegate {
 
     func applicationWillEnterForeground() {
         guard
-            let userId = store.applicationUserId,
+            let userId = store.revenuexUserId,
             let userRepository = userRepository
         else {return}
         

@@ -9,12 +9,12 @@ import Foundation
 
 protocol LogOpenEventUseCaseProtocol : UseCase {
     var userId:String {get}
-    var userRepository:ApplicationUserRepository {get}
+    var userRepository:RevenueXUserRepository {get}
 }
 
 struct LogOpenEventUseCase : LogOpenEventUseCaseProtocol {
     
-    var userRepository: ApplicationUserRepository
+    var userRepository: RevenueXUserRepository
     
     var userId: String
 

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol SyncAttiributionsUseCaseProtocol : UseCase {
-    var userRepository:ApplicationUserRepository {get}
+    var userRepository:RevenueXUserRepository {get}
     var userId:String {get}
     
 }
@@ -17,7 +17,7 @@ struct SyncAttiributionsUseCase : SyncAttiributionsUseCaseProtocol {
     
     var userId: String
     
-    var userRepository: ApplicationUserRepository
+    var userRepository: RevenueXUserRepository
 
     func execute() {
         //TODO:

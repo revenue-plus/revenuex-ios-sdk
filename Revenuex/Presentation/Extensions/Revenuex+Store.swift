@@ -10,7 +10,7 @@ import Foundation
 extension Revenuex {
     
     struct Store {
-        var applicationUserId:String?
+        var revenuexUserId:String?
     }
     
 }

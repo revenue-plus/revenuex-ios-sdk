@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct UserDTO : Codable {
-    var userId:String
+struct RevenueXUserDTO : Codable{
+    var id: Int
+    var applicationId: String
+    var revenueXId: String
+    var platformVersion: String?
+    var attributes: [AttiributeDTO] = []
 }

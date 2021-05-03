@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-class Revenuex {
+public class Revenuex {
     
     var store = Store()
     var paymentObserver:PaymentObserver?
@@ -22,18 +22,18 @@ class Revenuex {
     var requesterErrorLogger:RequesterErrorLogger?
     var requesterErrorResolver:RequesterErrorResolver?
     
-    var userRepository:ApplicationUserRepository?
-    var userStorage:ApplicationUserStorage?
+    var userRepository:RevenueXUserRepository?
+    var userStorage:RevenuexUserStorage?
 
     var purchasesRepository:PurchasesRepository?
 
-    static let shared: Revenuex = {
+    public static let shared: Revenuex = {
         return Revenuex()
     }()
      
     private init() {}
     
-    func configure(with APIKey:String, observerMode:Bool = true) {
+    public func configure(with APIKey:String, observerMode:Bool = true) {
         
         //Network
         self.networkConfiguration = DefaultNetworkConfiguration(baseURL: SystemInfo.baseURL,
@@ -41,7 +41,10 @@ class Revenuex {
                                                                     "clientid":APIKey,
                                                                     "platform":SystemInfo.platform,
                                                                     "platform-version":SystemInfo.platformVersion,
-                                                                    "sandbox":"\(SystemInfo.isSandbox)"
+                                                                    "sandbox":"\(SystemInfo.isSandbox)",
+                                                                    "app-version":SystemInfo.appVersion,
+                                                                    "region":SystemInfo.region,
+                                                                    "device-name":SystemInfo.deviceName
                                                                 ],
                                                                 queryParameters: [:])
         self.networkSessionManager = DefaultNetworkSessionManager()
@@ -54,9 +57,9 @@ class Revenuex {
                                                 errorLogger: self.requesterErrorLogger!)
         
         //Data
-        self.userStorage = UserDefaultsApplicationUserStorage(userDefaults: UserDefaults.standard)
+        self.userStorage = UserDefaultsRevenueXUserStorage(userDefaults: UserDefaults.standard)
        
-        self.userRepository = DefaultApplicationUserRepository(requester: self.requester!,
+        self.userRepository = DefaultRevenueXUserRepository(requester: self.requester!,
                                                     cache: self.userStorage!)
         
         self.paymentObserver = DefaultPaymentObserver(paymentQueue: SKPaymentQueue.default(), delegate: self)
@@ -65,23 +68,25 @@ class Revenuex {
         //Observers
         self.applicationStateObserver = DefaultApplicationStateObserver(delegate: self)
 
+        start()
     }
     
 }
 
 private extension Revenuex {
     
-    func onApplicationStarted() {
+    func applicationDidStart(with revenuexUser:RevenueXUserDTO) {
         guard
             let userRepository = userRepository,
-            let purchasesRepository = purchasesRepository,
-            let userId = store.applicationUserId
+            let purchasesRepository = purchasesRepository
         else {return}
         
-        LogOpenEventUseCase(userRepository: userRepository, userId: userId)
+        store.revenuexUserId = revenuexUser.revenueXId
+        
+        LogOpenEventUseCase(userRepository: userRepository, userId: revenuexUser.revenueXId)
             .execute()
         
-        GetOfferingsUseCase(purchases: purchasesRepository, userId: userId,
+        GetOfferingsUseCase(purchases: purchasesRepository, userId: revenuexUser.revenueXId,
                             completion: { (_) in
                                 self.paymentObserver?.start()
         })
@@ -96,7 +101,7 @@ private extension Revenuex {
         GetApplicationUserUseCase
             .init(userRepository: userRepository) {[weak self] (result) in
                 if case let .success(user) = result {
-                    self?.store.applicationUserId = user.userId
+                    self?.applicationDidStart(with: user)
                 }
             }
             .execute()

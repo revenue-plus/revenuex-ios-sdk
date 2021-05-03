@@ -8,13 +8,13 @@
 import Foundation
 
 protocol GetApplicationUserUseCaseProtocol : UseCase {
-    var userRepository: ApplicationUserRepository {get}
-    var completion: (Result<UserDTO, Error>) -> Void {get}
+    var userRepository: RevenueXUserRepository {get}
+    var completion: (Result<RevenueXUserDTO, Error>) -> Void {get}
 }
 
 struct GetApplicationUserUseCase : GetApplicationUserUseCaseProtocol {
-    var userRepository: ApplicationUserRepository
-    var completion: (Result<UserDTO, Error>) -> Void
+    var userRepository: RevenueXUserRepository
+    var completion: (Result<RevenueXUserDTO, Error>) -> Void
     
     func execute() {
         userRepository.getApplicationUser { (result) in

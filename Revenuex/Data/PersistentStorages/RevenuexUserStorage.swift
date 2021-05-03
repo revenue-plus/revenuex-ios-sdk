@@ -6,34 +6,33 @@
 //
 
 import Foundation
-import Combine
 
-protocol ApplicationUserStorage {
-    func getUser(completion: @escaping (Result<UserDTO?, Error>) -> Void)
-    func saveUser(user: UserDTO, completion: @escaping (Result<Void, Error>) -> Void)
+protocol RevenuexUserStorage {
+    func getUser(completion: @escaping (Result<RevenueXUserDTO?, Error>) -> Void)
+    func saveUser(user: RevenueXUserDTO, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
-struct UserDefaultsApplicationUserStorage : ApplicationUserStorage {
+struct UserDefaultsRevenueXUserStorage : RevenuexUserStorage {
     
     var userDefaults: UserDefaults
     
-    func getUser(completion: @escaping (Result<UserDTO?, Error>) -> Void){
+    func getUser(completion: @escaping (Result<RevenueXUserDTO?, Error>) -> Void){
         guard let data = userDefaults.data(forKey: "user") else {
             completion(.success(nil))
             return
         }
         do {
-            let user = try JSONDecoder().decode(UserDTO.self, from: data)
+            let user = try JSONDecoder().decode(RevenueXUserDTO.self, from: data)
             completion(.success(user))
         }catch {
             completion(.failure(error))
         }
     }
     
-    func saveUser(user: UserDTO, completion: @escaping (Result<Void, Error>) -> Void){
+    func saveUser(user: RevenueXUserDTO, completion: @escaping (Result<Void, Error>) -> Void){
         do {
             let userData = try JSONEncoder().encode(user)
-            userDefaults.setValue(userData, forKey: user.userId)
+            userDefaults.setValue(userData, forKey: "user")
             completion(.success(()))
         }catch {
             completion(.failure(error))

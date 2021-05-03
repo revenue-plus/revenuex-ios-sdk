@@ -11,7 +11,7 @@ protocol SetAttiributionLocallyUseCaseProtocol : UseCase {
     var userId:String {get}
     var name:String {get}
     var value:Any {get}
-    var userRepository:ApplicationUserRepository {get}
+    var userRepository:RevenueXUserRepository {get}
 }
 
 
@@ -24,7 +24,7 @@ struct SetAttiributionLocallyUseCase : SetAttiributionLocallyUseCaseProtocol {
     
     var value:Any
     
-    var userRepository: ApplicationUserRepository
+    var userRepository: RevenueXUserRepository
     
     func execute() {
         //TODO:
