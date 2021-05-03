@@ -1,5 +1,5 @@
 PODS:
-  - RevenueX (0.0.1)
+  - RevenueX (0.0.4)
 
 DEPENDENCIES:
   - RevenueX (from `../../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../../"
 
 SPEC CHECKSUMS:
-  RevenueX: f63906cd4a1564c33994f9c365dfe4c4a5f9eee5
+  RevenueX: ed3cd0c98e237cfa37ae93821097d48528311352
 
 PODFILE CHECKSUM: c2b2539e9778f7820afd12e2c156c2cff557f3a1
 
