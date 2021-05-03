@@ -7,37 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC4A49E3261F19F0005285BC /* REVNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49E2261F19F0005285BC /* REVNetworkManager.swift */; };
-		FC4A49EA261F250E005285BC /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49E9261F250E005285BC /* Test.swift */; };
-		FC4A49F3261F6ABD005285BC /* REVApplicationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49F2261F6ABD005285BC /* REVApplicationUser.swift */; };
-		FC4A49F7261F9B4D005285BC /* REVDependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49F6261F9B4D005285BC /* REVDependencyContainer.swift */; };
-		FC4A49FC261FA100005285BC /* REVCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A49FB261FA100005285BC /* REVCache.swift */; };
+		FC024D4E263F068000D76781 /* Reveuex+Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC024D4D263F068000D76781 /* Reveuex+Public.swift */; };
+		FC024D54263F078900D76781 /* SetAttiributionLocallyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC024D53263F078900D76781 /* SetAttiributionLocallyUseCase.swift */; };
+		FC024D71263F292A00D76781 /* Revenuex+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC024D70263F292A00D76781 /* Revenuex+Store.swift */; };
+		FC24F35F262B5D3500CC4FE7 /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC24F35E262B5D3500CC4FE7 /* SystemInfo.swift */; };
 		FC5A776526023B560073AB4C /* Revenuex.h in Headers */ = {isa = PBXBuildFile; fileRef = FC5A776326023B560073AB4C /* Revenuex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC5A776D26023B890073AB4C /* Revenuex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A776C26023B890073AB4C /* Revenuex.swift */; };
-		FCBE8E0D261C887B00217C74 /* REVSystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E0C261C887B00217C74 /* REVSystemInfo.swift */; };
-		FCBE8E12261C8C6C00217C74 /* REVConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E11261C8C6C00217C74 /* REVConfig.swift */; };
-		FCBE8E39261CEF6800217C74 /* REVError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E38261CEF6800217C74 /* REVError.swift */; };
-		FCBE8E3D261D950E00217C74 /* REVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E3C261D950E00217C74 /* REVModel.swift */; };
-		FCBE8E44261D96A100217C74 /* REVErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E43261D96A100217C74 /* REVErrorResponse.swift */; };
-		FCBE8E4A261DABE800217C74 /* REVCodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E49261DABE800217C74 /* REVCodableExtensions.swift */; };
+		FC7983E82625C6F200887607 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7983E72625C6F200887607 /* UseCase.swift */; };
+		FC7A6767263EEBC800E00227 /* GetOfferingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A6766263EEBC800E00227 /* GetOfferingsUseCase.swift */; };
+		FC7A676D263EFBE700E00227 /* ApplicationStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A676C263EFBE700E00227 /* ApplicationStateObserver.swift */; };
+		FC7A6771263EFD9800E00227 /* SyncAttiributionsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A6770263EFD9800E00227 /* SyncAttiributionsUseCase.swift */; };
+		FC7A677C263F017A00E00227 /* Revenuex+ApplicationStateObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A677B263F017A00E00227 /* Revenuex+ApplicationStateObserver.swift */; };
+		FC7A6780263F034F00E00227 /* Revenuex+PaymentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A677F263F034F00E00227 /* Revenuex+PaymentObserver.swift */; };
+		FCBE8E39261CEF6800217C74 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBE8E38261CEF6800217C74 /* APIError.swift */; };
+		FCD651922637FAE1000E01F4 /* PaymentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD651912637FAE1000E01F4 /* PaymentObserver.swift */; };
+		FCD65196263814B1000E01F4 /* PurchasesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD65195263814B1000E01F4 /* PurchasesRepository.swift */; };
+		FCED0466262DC18D00CF1CFB /* APIEnpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCED0465262DC18D00CF1CFB /* APIEnpoints.swift */; };
+		FCED046B262DDEAF00CF1CFB /* UserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCED046A262DDEAF00CF1CFB /* UserDTO.swift */; };
+		FCED047B262DF12B00CF1CFB /* ApplicationUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCED047A262DF12B00CF1CFB /* ApplicationUserRepository.swift */; };
+		FCED0480262DF60700CF1CFB /* ApplicationUserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCED047F262DF60700CF1CFB /* ApplicationUserStorage.swift */; };
+		FCF05682263AF51F0012869B /* NetworkErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0567C263AF51F0012869B /* NetworkErrorLogger.swift */; };
+		FCF05683263AF51F0012869B /* NetworkRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0567E263AF51F0012869B /* NetworkRequester.swift */; };
+		FCF05684263AF51F0012869B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0567F263AF51F0012869B /* NetworkService.swift */; };
+		FCF05685263AF51F0012869B /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF05680263AF51F0012869B /* NetworkConfiguration.swift */; };
+		FCF05686263AF51F0012869B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF05681263AF51F0012869B /* Endpoint.swift */; };
+		FCF05689263AF9800012869B /* RequesterErrorLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF05688263AF9800012869B /* RequesterErrorLogger.swift */; };
+		FCF0568D263AFB0C0012869B /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF0568C263AFB0C0012869B /* Cancelable.swift */; };
+		FCF05692263B09280012869B /* TypeAliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF05691263B09280012869B /* TypeAliases.swift */; };
+		FCFB068A263B247B003AA7BE /* OfferingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB0689263B247B003AA7BE /* OfferingDTO.swift */; };
+		FCFB068D263BE037003AA7BE /* GetApplicationUserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB068C263BE037003AA7BE /* GetApplicationUserUseCase.swift */; };
+		FCFB0691263BFCF5003AA7BE /* LogOpenEventUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB0690263BFCF5003AA7BE /* LogOpenEventUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FC4A49E2261F19F0005285BC /* REVNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVNetworkManager.swift; sourceTree = "<group>"; };
-		FC4A49E9261F250E005285BC /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		FC4A49F2261F6ABD005285BC /* REVApplicationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVApplicationUser.swift; sourceTree = "<group>"; };
-		FC4A49F6261F9B4D005285BC /* REVDependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVDependencyContainer.swift; sourceTree = "<group>"; };
-		FC4A49FB261FA100005285BC /* REVCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVCache.swift; sourceTree = "<group>"; };
+		FC024D4D263F068000D76781 /* Reveuex+Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reveuex+Public.swift"; sourceTree = "<group>"; };
+		FC024D53263F078900D76781 /* SetAttiributionLocallyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAttiributionLocallyUseCase.swift; sourceTree = "<group>"; };
+		FC024D70263F292A00D76781 /* Revenuex+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Revenuex+Store.swift"; sourceTree = "<group>"; };
+		FC24F35E262B5D3500CC4FE7 /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
 		FC5A776026023B560073AB4C /* Revenuex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Revenuex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5A776326023B560073AB4C /* Revenuex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Revenuex.h; sourceTree = "<group>"; };
 		FC5A776426023B560073AB4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC5A776C26023B890073AB4C /* Revenuex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Revenuex.swift; sourceTree = "<group>"; };
-		FCBE8E0C261C887B00217C74 /* REVSystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVSystemInfo.swift; sourceTree = "<group>"; };
-		FCBE8E11261C8C6C00217C74 /* REVConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVConfig.swift; sourceTree = "<group>"; };
-		FCBE8E38261CEF6800217C74 /* REVError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVError.swift; sourceTree = "<group>"; };
-		FCBE8E3C261D950E00217C74 /* REVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVModel.swift; sourceTree = "<group>"; };
-		FCBE8E43261D96A100217C74 /* REVErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVErrorResponse.swift; sourceTree = "<group>"; };
-		FCBE8E49261DABE800217C74 /* REVCodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REVCodableExtensions.swift; sourceTree = "<group>"; };
+		FC7983E72625C6F200887607 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		FC7A6766263EEBC800E00227 /* GetOfferingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOfferingsUseCase.swift; sourceTree = "<group>"; };
+		FC7A676C263EFBE700E00227 /* ApplicationStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationStateObserver.swift; sourceTree = "<group>"; };
+		FC7A6770263EFD9800E00227 /* SyncAttiributionsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncAttiributionsUseCase.swift; sourceTree = "<group>"; };
+		FC7A677B263F017A00E00227 /* Revenuex+ApplicationStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Revenuex+ApplicationStateObserver.swift"; sourceTree = "<group>"; };
+		FC7A677F263F034F00E00227 /* Revenuex+PaymentObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Revenuex+PaymentObserver.swift"; sourceTree = "<group>"; };
+		FCBE8E38261CEF6800217C74 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		FCD651912637FAE1000E01F4 /* PaymentObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentObserver.swift; sourceTree = "<group>"; };
+		FCD65195263814B1000E01F4 /* PurchasesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesRepository.swift; sourceTree = "<group>"; };
+		FCED0465262DC18D00CF1CFB /* APIEnpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEnpoints.swift; sourceTree = "<group>"; };
+		FCED046A262DDEAF00CF1CFB /* UserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDTO.swift; sourceTree = "<group>"; };
+		FCED047A262DF12B00CF1CFB /* ApplicationUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUserRepository.swift; sourceTree = "<group>"; };
+		FCED047F262DF60700CF1CFB /* ApplicationUserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationUserStorage.swift; sourceTree = "<group>"; };
+		FCF0567C263AF51F0012869B /* NetworkErrorLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkErrorLogger.swift; sourceTree = "<group>"; };
+		FCF0567E263AF51F0012869B /* NetworkRequester.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequester.swift; sourceTree = "<group>"; };
+		FCF0567F263AF51F0012869B /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		FCF05680263AF51F0012869B /* NetworkConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
+		FCF05681263AF51F0012869B /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		FCF05688263AF9800012869B /* RequesterErrorLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterErrorLogger.swift; sourceTree = "<group>"; };
+		FCF0568C263AFB0C0012869B /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
+		FCF05691263B09280012869B /* TypeAliases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeAliases.swift; sourceTree = "<group>"; };
+		FCFB0689263B247B003AA7BE /* OfferingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferingDTO.swift; sourceTree = "<group>"; };
+		FCFB068C263BE037003AA7BE /* GetApplicationUserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetApplicationUserUseCase.swift; sourceTree = "<group>"; };
+		FCFB0690263BFCF5003AA7BE /* LogOpenEventUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOpenEventUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,28 +85,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC4A49ED261F6416005285BC /* Responses */ = {
+		FC29184F262B516900079E1D /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
-				FCBE8E43261D96A100217C74 /* REVErrorResponse.swift */,
+				FC7A677A263F014F00E00227 /* Observers */,
+				FCF0568B263AFB060012869B /* Common */,
+				FCF0567B263AF51F0012869B /* Logging */,
+				FCF0567D263AF51F0012869B /* Network */,
+				FC24F35E262B5D3500CC4FE7 /* SystemInfo.swift */,
 			);
-			path = Responses;
-			sourceTree = "<group>";
-		};
-		FC4A49F1261F6A43005285BC /* Application User */ = {
-			isa = PBXGroup;
-			children = (
-				FC4A49F2261F6ABD005285BC /* REVApplicationUser.swift */,
-			);
-			path = "Application User";
-			sourceTree = "<group>";
-		};
-		FC4A49FA261FA0F4005285BC /* Device */ = {
-			isa = PBXGroup;
-			children = (
-				FC4A49FB261FA100005285BC /* REVCache.swift */,
-			);
-			path = Device;
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		FC5A775626023B560073AB4C = {
@@ -94,62 +116,155 @@
 		FC5A776226023B560073AB4C /* Revenuex */ = {
 			isa = PBXGroup;
 			children = (
-				FC4A49FA261FA0F4005285BC /* Device */,
-				FC4A49F1261F6A43005285BC /* Application User */,
-				FCBE8DF0261C536D00217C74 /* Common Files */,
-				FCBE8E0A261C885900217C74 /* Misc */,
-				FCBE8DEF261C536100217C74 /* Network */,
+				FC29184F262B516900079E1D /* Infrastructure */,
+				FCF05695263B0A820012869B /* Presentation */,
+				FCD8EA70262359D70035129F /* Domain */,
+				FCD043B22622149F00ECDFC0 /* Data */,
 				FC5A776326023B560073AB4C /* Revenuex.h */,
 				FC5A776426023B560073AB4C /* Info.plist */,
-				FC5A776C26023B890073AB4C /* Revenuex.swift */,
 			);
 			path = Revenuex;
 			sourceTree = "<group>";
 		};
-		FCBE8DEF261C536100217C74 /* Network */ = {
+		FC7983E32625C69E00887607 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				FC4A49E2261F19F0005285BC /* REVNetworkManager.swift */,
-				FCBE8E59261DC40800217C74 /* Requests */,
-				FC4A49ED261F6416005285BC /* Responses */,
-				FCBE8E42261D968100217C74 /* Models */,
+				FCFB0690263BFCF5003AA7BE /* LogOpenEventUseCase.swift */,
+				FCFB068C263BE037003AA7BE /* GetApplicationUserUseCase.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		FC7A676F263EFD8100E00227 /* Attiributions */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A6770263EFD9800E00227 /* SyncAttiributionsUseCase.swift */,
+				FC024D53263F078900D76781 /* SetAttiributionLocallyUseCase.swift */,
+			);
+			path = Attiributions;
+			sourceTree = "<group>";
+		};
+		FC7A6779263F012500E00227 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC024D4D263F068000D76781 /* Reveuex+Public.swift */,
+				FC7A677B263F017A00E00227 /* Revenuex+ApplicationStateObserver.swift */,
+				FC7A677F263F034F00E00227 /* Revenuex+PaymentObserver.swift */,
+				FC024D70263F292A00D76781 /* Revenuex+Store.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FC7A677A263F014F00E00227 /* Observers */ = {
+			isa = PBXGroup;
+			children = (
+				FCD651912637FAE1000E01F4 /* PaymentObserver.swift */,
+				FC7A676C263EFBE700E00227 /* ApplicationStateObserver.swift */,
+			);
+			path = Observers;
+			sourceTree = "<group>";
+		};
+		FCD043B22622149F00ECDFC0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				FCED047D262DF59F00CF1CFB /* PersistentStorages */,
+				FCED0477262DF09100CF1CFB /* Repositories */,
+				FCED0469262DDE9100CF1CFB /* DataTransferObjects */,
+				FCED0464262DC17500CF1CFB /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		FCD8EA70262359D70035129F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A676F263EFD8100E00227 /* Attiributions */,
+				FCF0569B263B13420012869B /* Offerings */,
+				FC7983E32625C69E00887607 /* User */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		FCED0464262DC17500CF1CFB /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FCED0465262DC18D00CF1CFB /* APIEnpoints.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		FCBE8DF0261C536D00217C74 /* Common Files */ = {
+		FCED0469262DDE9100CF1CFB /* DataTransferObjects */ = {
 			isa = PBXGroup;
 			children = (
-				FCBE8E3C261D950E00217C74 /* REVModel.swift */,
+				FCED046A262DDEAF00CF1CFB /* UserDTO.swift */,
+				FCFB0689263B247B003AA7BE /* OfferingDTO.swift */,
 			);
-			path = "Common Files";
+			path = DataTransferObjects;
 			sourceTree = "<group>";
 		};
-		FCBE8E0A261C885900217C74 /* Misc */ = {
+		FCED0477262DF09100CF1CFB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				FCBE8E0C261C887B00217C74 /* REVSystemInfo.swift */,
-				FCBE8E11261C8C6C00217C74 /* REVConfig.swift */,
-				FCBE8E49261DABE800217C74 /* REVCodableExtensions.swift */,
-				FC4A49F6261F9B4D005285BC /* REVDependencyContainer.swift */,
+				FCED047A262DF12B00CF1CFB /* ApplicationUserRepository.swift */,
+				FCD65195263814B1000E01F4 /* PurchasesRepository.swift */,
 			);
-			path = Misc;
+			path = Repositories;
 			sourceTree = "<group>";
 		};
-		FCBE8E42261D968100217C74 /* Models */ = {
+		FCED047D262DF59F00CF1CFB /* PersistentStorages */ = {
 			isa = PBXGroup;
 			children = (
-				FCBE8E38261CEF6800217C74 /* REVError.swift */,
+				FCED047F262DF60700CF1CFB /* ApplicationUserStorage.swift */,
 			);
-			path = Models;
+			path = PersistentStorages;
 			sourceTree = "<group>";
 		};
-		FCBE8E59261DC40800217C74 /* Requests */ = {
+		FCF0567B263AF51F0012869B /* Logging */ = {
 			isa = PBXGroup;
 			children = (
-				FC4A49E9261F250E005285BC /* Test.swift */,
+				FCF0567C263AF51F0012869B /* NetworkErrorLogger.swift */,
+				FCF05688263AF9800012869B /* RequesterErrorLogger.swift */,
 			);
-			path = Requests;
+			path = Logging;
+			sourceTree = "<group>";
+		};
+		FCF0567D263AF51F0012869B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FCBE8E38261CEF6800217C74 /* APIError.swift */,
+				FCF0567E263AF51F0012869B /* NetworkRequester.swift */,
+				FCF0567F263AF51F0012869B /* NetworkService.swift */,
+				FCF05680263AF51F0012869B /* NetworkConfiguration.swift */,
+				FCF05681263AF51F0012869B /* Endpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FCF0568B263AFB060012869B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FC7983E72625C6F200887607 /* UseCase.swift */,
+				FCF0568C263AFB0C0012869B /* Cancelable.swift */,
+				FCF05691263B09280012869B /* TypeAliases.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FCF05695263B0A820012869B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				FC5A776C26023B890073AB4C /* Revenuex.swift */,
+				FC7A6779263F012500E00227 /* Extensions */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		FCF0569B263B13420012869B /* Offerings */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A6766263EEBC800E00227 /* GetOfferingsUseCase.swift */,
+			);
+			path = Offerings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,18 +346,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC4A49E3261F19F0005285BC /* REVNetworkManager.swift in Sources */,
-				FCBE8E4A261DABE800217C74 /* REVCodableExtensions.swift in Sources */,
-				FC4A49F3261F6ABD005285BC /* REVApplicationUser.swift in Sources */,
-				FCBE8E39261CEF6800217C74 /* REVError.swift in Sources */,
-				FCBE8E12261C8C6C00217C74 /* REVConfig.swift in Sources */,
-				FC4A49FC261FA100005285BC /* REVCache.swift in Sources */,
-				FCBE8E0D261C887B00217C74 /* REVSystemInfo.swift in Sources */,
+				FC7A6771263EFD9800E00227 /* SyncAttiributionsUseCase.swift in Sources */,
+				FC024D4E263F068000D76781 /* Reveuex+Public.swift in Sources */,
+				FCD651922637FAE1000E01F4 /* PaymentObserver.swift in Sources */,
+				FC024D71263F292A00D76781 /* Revenuex+Store.swift in Sources */,
+				FC7A677C263F017A00E00227 /* Revenuex+ApplicationStateObserver.swift in Sources */,
+				FCBE8E39261CEF6800217C74 /* APIError.swift in Sources */,
+				FC24F35F262B5D3500CC4FE7 /* SystemInfo.swift in Sources */,
+				FC7983E82625C6F200887607 /* UseCase.swift in Sources */,
+				FCF05684263AF51F0012869B /* NetworkService.swift in Sources */,
+				FC024D54263F078900D76781 /* SetAttiributionLocallyUseCase.swift in Sources */,
+				FCED047B262DF12B00CF1CFB /* ApplicationUserRepository.swift in Sources */,
+				FCF05692263B09280012869B /* TypeAliases.swift in Sources */,
+				FCF05682263AF51F0012869B /* NetworkErrorLogger.swift in Sources */,
+				FCD65196263814B1000E01F4 /* PurchasesRepository.swift in Sources */,
+				FCFB0691263BFCF5003AA7BE /* LogOpenEventUseCase.swift in Sources */,
 				FC5A776D26023B890073AB4C /* Revenuex.swift in Sources */,
-				FCBE8E44261D96A100217C74 /* REVErrorResponse.swift in Sources */,
-				FC4A49F7261F9B4D005285BC /* REVDependencyContainer.swift in Sources */,
-				FC4A49EA261F250E005285BC /* Test.swift in Sources */,
-				FCBE8E3D261D950E00217C74 /* REVModel.swift in Sources */,
+				FC7A6767263EEBC800E00227 /* GetOfferingsUseCase.swift in Sources */,
+				FCED0480262DF60700CF1CFB /* ApplicationUserStorage.swift in Sources */,
+				FCF0568D263AFB0C0012869B /* Cancelable.swift in Sources */,
+				FCF05683263AF51F0012869B /* NetworkRequester.swift in Sources */,
+				FCF05686263AF51F0012869B /* Endpoint.swift in Sources */,
+				FCF05685263AF51F0012869B /* NetworkConfiguration.swift in Sources */,
+				FCED046B262DDEAF00CF1CFB /* UserDTO.swift in Sources */,
+				FCF05689263AF9800012869B /* RequesterErrorLogger.swift in Sources */,
+				FC7A676D263EFBE700E00227 /* ApplicationStateObserver.swift in Sources */,
+				FCED0466262DC18D00CF1CFB /* APIEnpoints.swift in Sources */,
+				FCFB068D263BE037003AA7BE /* GetApplicationUserUseCase.swift in Sources */,
+				FC7A6780263F034F00E00227 /* Revenuex+PaymentObserver.swift in Sources */,
+				FCFB068A263B247B003AA7BE /* OfferingDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +433,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -359,7 +491,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

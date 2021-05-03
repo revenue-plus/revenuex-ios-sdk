@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias REVNetworkManagerCompletionBlock<ResponseModel:Codable> = ((Result<ResponseModel, REVError>))->()
+typealias REVNetworkManagerCompletionBlock<ResponseModel:Codable> = ((Result<ResponseModel, APIError>))->()
 
 protocol REVRequestable {
 
@@ -96,19 +96,15 @@ class REVNetworkManager<ResponseModel:Codable> {
     
     var queryItems = [URLQueryItem]()
     var bodyItems = [String:Any]()
-    var config:REVConfig
+    var config:SDKConfiguration
     
-    init (config: REVConfig = REVDependencyContainer.resolve()) {
+    init (config: SDKConfiguration = DependencyContainer.resolve()) {
         self.config = config
     }
     
     lazy var defaultHttpHeaders:[String:String] = {
         return [
-            "Content-Type":"application/json",
-            "Accept":"application/json",
-            "platform-version" : REVSystemInfo.platformVersion,
-            "platform": REVSystemInfo.platform,
-            "sandbox":"\(REVSystemInfo.isSandbox)"
+            "Content-Type":"application/json"
         ]
     }()
 
@@ -140,57 +136,57 @@ class REVNetworkManager<ResponseModel:Codable> {
     
     func handleResponse(urlResponse:URLResponse?, data:Data?, completion: @escaping REVNetworkManagerCompletionBlock<ResponseModel>){
         
-        guard let data = data, data.isEmpty == false else {
-            completion(.failure(.responseError(reason: .inputDataNilOrZeroLength)))
-            return
-        }
-        let status = REVHttpStatus.getStatus(by: urlResponse)
-        
-        switch status {
-        case .Information:
-            break;
-        case .Succcess,.Redirection:
-            //TODO: Maybe some of redirection related status codes should be considered as fail.
-            do {
-                let response:ResponseModel = try ResponseModel.decode(from: data)
-                completion(.success(response))
-            } catch  {
-                completion(.failure(.responseError(reason: .decodingFailed(error: error))))
-            }
-        case .ClientError:
-            completion(.failure(.responseError(reason: .clientError(response: try?  REVErrorResponse.decode(from: data)))))
-        case .ServerError:
-            completion(.failure(.responseError(reason: .serverError(response: try?  REVErrorResponse.decode(from: data)))))
-        case .Unofficial(let code):
-            completion(.failure(.responseError(reason: .unofficialHttpStatusCode(code: code))))
-        }
+//        guard let data = data, data.isEmpty == false else {
+//            completion(.failure(.responseError(reason: .inputDataNilOrZeroLength)))
+//            return
+//        }
+//        let status = REVHttpStatus.getStatus(by: urlResponse)
+//        
+//        switch status {
+//        case .Information:
+//            break;
+//        case .Succcess,.Redirection:
+//            //TODO: Maybe some of redirection related status codes should be considered as fail.
+//            do {
+//                let response:ResponseModel = try ResponseModel.decode(from: data)
+//                completion(.success(response))
+//            } catch  {
+//                completion(.failure(.responseError(reason: .decodingFailed(error: error))))
+//            }
+//        case .ClientError:
+//            completion(.failure(.responseError(reason: .clientError(response: try?  REVErrorResponse.decode(from: data)))))
+//        case .ServerError:
+//            completion(.failure(.responseError(reason: .serverError(response: try?  REVErrorResponse.decode(from: data)))))
+//        case .Unofficial(let code):
+//            completion(.failure(.responseError(reason: .unofficialHttpStatusCode(code: code))))
+//        }
     }
     
     func startRequest(path:String?, httpMethod:REVHttpMethod, completion: @escaping REVNetworkManagerCompletionBlock<ResponseModel>) {
         
-        var components = URLComponents()
-        components.scheme = config.urlScheme
-        components.host = config.hostName
-        if let path = path {
-            components.path = path
-        }
-        components.queryItems = queryItems
-        
-        guard let url = components.url else {
-            completion(.failure(.parameterEncodingFailed(reason: .missingURL)))
-            return
-        }
-        let session = URLSession.shared
-        let request = generateRequest(url: url, httpMethod: httpMethod.rawValue)
-        
-        let task = session.dataTask(with: request) { [weak self] (data, response, error) in
-            if let error = error {
-                completion(.failure(.networkError(error: error)))
-            } else {
-                self?.handleResponse(urlResponse: response, data:data, completion: completion)
-            }
-        }
-        task.resume()
+//        var components = URLComponents()
+//        components.scheme = config.urlScheme
+//        components.host = config.hostName
+//        if let path = path {
+//            components.path = path
+//        }
+//        components.queryItems = queryItems
+//
+//        guard let url = components.url else {
+//            completion(.failure(.parameterEncodingFailed(reason: .missingURL)))
+//            return
+//        }
+//        let session = URLSession.shared
+//        let request = generateRequest(url: url, httpMethod: httpMethod.rawValue)
+//
+//        let task = session.dataTask(with: request) { [weak self] (data, response, error) in
+//            if let error = error {
+//                completion(.failure(.networkError(error: error)))
+//            } else {
+//                self?.handleResponse(urlResponse: response, data:data, completion: completion)
+//            }
+//        }
+//        task.resume()
     }
     
 }

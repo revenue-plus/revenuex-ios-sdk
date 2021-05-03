@@ -7,25 +7,24 @@
 
 import UIKit
 
-///MARK- REVError
-enum REVError: Error {
-    
+enum APIError: Error {
+
     /// `REVRequest` threw an error during the encoding process.
-    case parameterEncodingFailed(reason: REVParameterEncodingFailureReason)
-    
+    case parameterEncodingFailed(reason: ParameterEncodingFailureReason)
+
     /// Api request failed.
-    case responseError(reason: REVResponseErrorReason)
-    
+    case responseError(reason: ResponseErrorReason)
+
     /// Network Error
     case networkError(error: Error)
     
     /// Unknown error.
     case unknown
-    
-    
+
+
 }
 
-extension REVError:LocalizedError {
+extension APIError:LocalizedError {
     var errorDescription: String? {
         switch self {
         case .parameterEncodingFailed(let reason):
@@ -41,13 +40,13 @@ extension REVError:LocalizedError {
 }
 
 ///MARK- REVParameterEncodingFailureReason
-public enum REVParameterEncodingFailureReason {
-    
+public enum ParameterEncodingFailureReason {
+
     /// The `URLRequest` did not have a `URL` to encode.
     case missingURL
 }
 
-extension REVParameterEncodingFailureReason:LocalizedError {
+extension ParameterEncodingFailureReason:LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .missingURL:
@@ -59,32 +58,26 @@ extension REVParameterEncodingFailureReason:LocalizedError {
 
 ///MARK- REVResponseErrorReason
 
-public enum REVResponseErrorReason {
+public enum ResponseErrorReason {
+
+    case unexpectedResponse
     
-    /// Http response code not specified by any standard.
-    case unofficialHttpStatusCode(code: Int)
-    
-    /// The server response contained no data or the data was zero length.
+    case unexpectedHttpCode(code: Int, responseData:Data?)
+
     case inputDataNilOrZeroLength
     
-    /// A `DataDecoder` failed to decode the response due to the associated `Error`.
     case decodingFailed(error: Error)
-    
-    ///  The error seems to have been caused by the client.
-    case clientError(response:REVErrorResponse?)
-    
-    /// Indicate cases in which the server is aware that it has encountered an error or is otherwise incapable of performing the request.
-    case serverError(response:REVErrorResponse?)
+
+
 }
 
-extension REVResponseErrorReason:LocalizedError {
+extension ResponseErrorReason:LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .unofficialHttpStatusCode(let code):
-            return "Status code \(code) not specified by any standard."
-        case .clientError(let response),
-             .serverError(let response):
-            return response?.localizedDescription
+        case .unexpectedResponse:
+            return "Unexpected response"
+        case .unexpectedHttpCode(let code, _):
+            return "Unexpected HTTP code: \(code)"
         case .decodingFailed(let error):
             return "Response could not be decoded because of error:\n\(error.localizedDescription)"
         case .inputDataNilOrZeroLength:

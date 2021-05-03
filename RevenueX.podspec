@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.framework      = 'StoreKit'
   s.swift_version       = '5.0'
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   # s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 

@@ -6,24 +6,28 @@
 //
 
 import UIKit
-        
-class REVSystemInfo {
 
-    static var platform:String {
+protocol SystemInfoProtocol {
+    var platform:String {get}
+    var platformVersion:String {get}
+    var isSandbox:Bool {get}
+}
+        
+struct SystemInfo : SystemInfoProtocol{
+
+    var platform:String {
         return "ios"
     }
     
-    static var platformVersion:String {
+    var platformVersion:String {
         return ProcessInfo().operatingSystemVersionString
     }
     
-    static var isSandbox:Bool {
+    var isSandbox:Bool {
         guard let url = Bundle.main.appStoreReceiptURL else {
             return false
         }
         let receiptURLString = url.path;
         return receiptURLString.contains("sandboxReceipt")
     }
-    
-    
 }
